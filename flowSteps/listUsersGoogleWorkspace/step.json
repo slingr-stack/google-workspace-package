@@ -1,0 +1,15 @@
+{
+  "label": "List all users from Google Workspace",
+  "name": "listUsersGoogleWorkspace",
+  "category": "integrations",
+  "description": "This flow step will send a request to list all users from googleworkspace endpoint",
+  "inputs": [ ],
+  "outputs": [
+    {
+      "label": "Response",
+      "name": "response",
+      "type": "object",
+      "description": "The response to external URL"
+    }
+  ]
+}

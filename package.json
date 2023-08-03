@@ -1,0 +1,159 @@
+{
+    "name": "googleworkspace",
+    "label": "Google Workspace Package",
+    "dependencies": [
+        {
+            "type": "service",
+            "name": "http",
+            "version": "v1.2.6",
+            "instanceId": "shared"
+        }
+    ],
+    "configuration": [
+        {
+            "name": "serviceAccountEmail",
+            "label": "Service Account Email",
+            "description": "The email from service account created",
+            "type": "text",
+            "required": true
+        },
+        {
+            "name": "privateKey",
+            "label": "Private Key",
+            "description": "The private key associated to the service account",
+            "type": "password",
+            "required": true
+        },
+        {
+            "label": "Auth Scopes",
+            "name": "authScopes",
+            "description": "The auth scopes the service accounts have, if you select scopes that don't belong to your service account it will lead to authorization errors",
+            "type": "dropDown",
+            "multiplicity": "many",
+            "defaultValue": [
+                "user"
+            ],
+            "typeOptions": {
+                "allowCustom": true,
+                "possibleValues": [
+                    {
+                        "label": "Directory > User aliases readonly scope",
+                        "name": "directory.user.alias.readonly"
+                    },
+                    {
+                        "label": "Directory > User aliases scope",
+                        "name": "directory.user.alias"
+                    },
+                    {
+                        "label": "Directory > Users readonly scope",
+                        "name": "directory.user.readonly"
+                    },
+                    {
+                        "label": "Directory > Users scope",
+                        "name": "directory.user"
+                    },
+                    {
+                        "label": "Directory > Organizational units redaonly scope",
+                        "name": "directory.orgunit.readonly"
+                    },
+                    {
+                        "label": "Directory > Organizational units scope",
+                        "name": "directory.orgunit"
+                    },
+                    {
+                        "label": "Directory > Groups readonly scope",
+                        "name": "directory.group.readonly"
+                    },
+                    {
+                        "label": "Directory > Groups scope",
+                        "name": "directory.group"
+                    },
+                    {
+                        "label": "Directory > Group members readonly scope",
+                        "name": "directory.group.member.readonly"
+                    },
+                    {
+                        "label": "Directory > Group members scope",
+                        "name": "directory.group.member"
+                    },
+                    {
+                        "label": "Directory > Users security scope",
+                        "name": "directory.user.security"
+                    },
+                    {
+                        "label": "Directory > Role management scope",
+                        "name": "directory.rolemanagement"
+                    },
+                    {
+                        "label": "Directory > Resource Calendar readonly scope",
+                        "name": "directory.resource.calendar.readonly"
+                    },
+                    {
+                        "label": "Directory > Resource Calendar scope",
+                        "name": "directory.resource.calendar"
+                    },
+                    {
+                        "label": "Directory > Domains readonly scope",
+                        "name": "directory.domain.readonly"
+                    },
+                    {
+                        "label": "Directory > Domains scope",
+                        "name": "directory.domain"
+                    },
+                    {
+                        "label": "Directory > Customers readonly scope",
+                        "name": "directory.customer.readonly"
+                    },
+                    {
+                        "label": "Directory > Customers scope",
+                        "name": "directory.customer"
+                    },
+                    {
+                        "label": "Directory > Userschema readonly scope",
+                        "name": "directory.userschema.readonly"
+                    },
+                    {
+                        "label": "Directory > Userschema scope",
+                        "name": "directory.userschema"
+                    },
+                    {
+                        "label": "Directory > Role management readonly scope",
+                        "name": "directory.rolemanagement.readonly"
+                    },
+                    {
+                        "label": "Data Transfer > Data transfer scope",
+                        "name": "datatransfer"
+                    },
+                    {
+                        "label": "Data Transfer > Data transfer readonly scope",
+                        "name": "datatransfer.readonly"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "GOOGLEWORKSPACE_API_BASE_URL",
+            "label": "Googleworkspace Api Url",
+            "type": "label",
+            "value": "https://admin.googleapis.com/admin"
+        }
+    ],
+    "events": [],
+    "metadata": [
+        {
+            "type": "script",
+            "namespace": "api",
+            "path": "/scripts/functions.js"
+        },
+        {
+            "type": "listener",
+            "namespace": "webhook",
+            "path": "/listeners/listeners.js"
+        },
+        {
+            "type": "flowStep",
+            "namespace": "steps",
+            "path": "/flowSteps/apiCallGoogleworkspace"
+        }
+    ]
+}
