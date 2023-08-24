@@ -101,7 +101,7 @@ exports.directory.groups.post = function(httpOptions) {
     var url = parse('/directory/v1/groups');
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.groups.put = function(groupKey, httpOptions) {
@@ -112,7 +112,7 @@ exports.directory.groups.put = function(groupKey, httpOptions) {
     var url = parse('/directory/v1/groups/:groupKey', [groupKey]);
     sys.logs.debug('[googleworkspace] PUT from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.put(Googleworkspace(options));
+    return httpService.put(GoogleWorkspace(options));
 };
 
 exports.directory.groups.aliases.post = function(groupKey, httpOptions) {
@@ -123,7 +123,7 @@ exports.directory.groups.aliases.post = function(groupKey, httpOptions) {
     var url = parse('/directory/v1/groups/:groupKey/aliases', [groupKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.groups.get = function(groupKey, httpOptions) {
@@ -134,7 +134,7 @@ exports.directory.groups.get = function(groupKey, httpOptions) {
     var url = parse('/directory/v1/groups/:groupKey', [groupKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.groups.aliases.get = function(groupKey, httpOptions) {
@@ -145,7 +145,7 @@ exports.directory.groups.aliases.get = function(groupKey, httpOptions) {
     var url = parse('/directory/v1/groups/:groupKey/aliases', [groupKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.groups.aliases.delete = function(groupKey, aliasId, httpOptions) {
@@ -156,7 +156,7 @@ exports.directory.groups.aliases.delete = function(groupKey, aliasId, httpOption
     var url = parse('/directory/v1/groups/:groupKey/aliases/:aliasId', [groupKey, aliasId]);
     sys.logs.debug('[googleworkspace] DELETE from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options));
+    return httpService.delete(GoogleWorkspace(options));
 };
 
 exports.directory.groups.delete = function(groupKey, httpOptions) {
@@ -167,7 +167,7 @@ exports.directory.groups.delete = function(groupKey, httpOptions) {
     var url = parse('/directory/v1/groups/:groupKey', [groupKey]);
     sys.logs.debug('[googleworkspace] DELETE from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options));
+    return httpService.delete(GoogleWorkspace(options));
 };
 
 exports.directory.groups.members.post = function(groupKey, httpOptions) {
@@ -178,7 +178,7 @@ exports.directory.groups.members.post = function(groupKey, httpOptions) {
     var url = parse('/directory/v1/groups/:groupKey/members', [groupKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.groups.members.put = function(groupKey, memberKey, httpOptions) {
@@ -189,7 +189,7 @@ exports.directory.groups.members.put = function(groupKey, memberKey, httpOptions
     var url = parse('/directory/v1/groups/:groupKey/members/:memberKey', [groupKey, memberKey]);
     sys.logs.debug('[googleworkspace] PUT from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.put(Googleworkspace(options));
+    return httpService.put(GoogleWorkspace(options));
 };
 
 exports.directory.groups.members.get = function(groupKey, memberKey, httpOptions) {
@@ -200,7 +200,7 @@ exports.directory.groups.members.get = function(groupKey, memberKey, httpOptions
     var url = parse('/directory/v1/groups/:groupKey/members/:memberKey', [groupKey, memberKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.groups.members.delete = function(groupKey, memberKey, httpOptions) {
@@ -211,7 +211,7 @@ exports.directory.groups.members.delete = function(groupKey, memberKey, httpOpti
     var url = parse('/directory/v1/groups/:groupKey/members/:memberKey', [groupKey, memberKey]);
     sys.logs.debug('[googleworkspace] DELETE from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options));
+    return httpService.delete(GoogleWorkspace(options));
 };
 
 exports.directory.customer.orgunits.post = function(customerKey, httpOptions) {
@@ -222,7 +222,7 @@ exports.directory.customer.orgunits.post = function(customerKey, httpOptions) {
     var url = parse('/directory/v1/customer/:customerKey/orgunits', [customerKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.customer.orgunits.put = function(customerKey, orgUnitPath, httpOptions) {
@@ -233,7 +233,7 @@ exports.directory.customer.orgunits.put = function(customerKey, orgUnitPath, htt
     var url = parse('/directory/v1/customer/:customerKey/orgunits/:orgUnitPath', [customerKey, orgUnitPath]);
     sys.logs.debug('[googleworkspace] PUT from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.put(Googleworkspace(options));
+    return httpService.put(GoogleWorkspace(options));
 };
 
 exports.directory.customer.orgunits.get = function(customerKey, orgUnitPath, httpOptions) {
@@ -244,7 +244,7 @@ exports.directory.customer.orgunits.get = function(customerKey, orgUnitPath, htt
     var url = parse('/directory/v1/customer/:customerKey/orgunits/:orgUnitPath', [customerKey, orgUnitPath]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.customer.orgunits.delete = function(customerKey, orgUnitPath, httpOptions) {
@@ -255,7 +255,7 @@ exports.directory.customer.orgunits.delete = function(customerKey, orgUnitPath, 
     var url = parse('/directory/v1/customer/:customerKey/orgunits/:orgUnitPath', [customerKey, orgUnitPath]);
     sys.logs.debug('[googleworkspace] DELETE from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options));
+    return httpService.delete(GoogleWorkspace(options));
 };
 
 exports.directory.customer.roles.ALL.privileges.get = function(customerKey, httpOptions) {
@@ -266,7 +266,7 @@ exports.directory.customer.roles.ALL.privileges.get = function(customerKey, http
     var url = parse('/directory/v1/customer/:customerKey/roles/ALL/privileges', [customerKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.customer.roles.get = function(customerKey, httpOptions) {
@@ -277,7 +277,7 @@ exports.directory.customer.roles.get = function(customerKey, httpOptions) {
     var url = parse('/directory/v1/customer/:customerKey/roles', [customerKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.customer.roles.post = function(customerKey, httpOptions) {
@@ -288,7 +288,7 @@ exports.directory.customer.roles.post = function(customerKey, httpOptions) {
     var url = parse('/directory/v1/customer/:customerKey/roles', [customerKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.customer.roleassignments.post = function(customerKey, httpOptions) {
@@ -299,7 +299,7 @@ exports.directory.customer.roleassignments.post = function(customerKey, httpOpti
     var url = parse('/directory/v1/customer/:customerKey/roleassignments', [customerKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.customers.get = function(customerKey, httpOptions) {
@@ -310,7 +310,7 @@ exports.directory.customers.get = function(customerKey, httpOptions) {
     var url = parse('/directory/v1/customers/:customerKey', [customerKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.customers.put = function(customerKey, httpOptions) {
@@ -321,14 +321,14 @@ exports.directory.customers.put = function(customerKey, httpOptions) {
     var url = parse('/directory/v1/customers/:customerKey', [customerKey]);
     sys.logs.debug('[googleworkspace] PUT from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.put(Googleworkspace(options));
+    return httpService.put(GoogleWorkspace(options));
 };
 
 exports.directory.users.post = function(httpOptions) {
     var url = parse('/directory/v1/users');
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.users.put = function(userKey, httpOptions) {
@@ -339,7 +339,7 @@ exports.directory.users.put = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey', [userKey]);
     sys.logs.debug('[googleworkspace] PUT from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.put(Googleworkspace(options));
+    return httpService.put(GoogleWorkspace(options));
 };
 
 exports.directory.users.makeAdmin.post = function(userKey, httpOptions) {
@@ -350,7 +350,7 @@ exports.directory.users.makeAdmin.post = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey/makeAdmin', [userKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.users.get = function(userKey, httpOptions) {
@@ -361,7 +361,7 @@ exports.directory.users.get = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey', [userKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.users.photos.thumbnail.get = function(userKey, httpOptions) {
@@ -372,7 +372,7 @@ exports.directory.users.photos.thumbnail.get = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey/photos/thumbnail', [userKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.users.photos.thumbnail.put = function(userKey, httpOptions) {
@@ -383,7 +383,7 @@ exports.directory.users.photos.thumbnail.put = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey/photos/thumbnail', [userKey]);
     sys.logs.debug('[googleworkspace] PUT from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.put(Googleworkspace(options));
+    return httpService.put(GoogleWorkspace(options));
 };
 
 exports.directory.users.photos.thumbnail.delete = function(userKey, httpOptions) {
@@ -394,7 +394,7 @@ exports.directory.users.photos.thumbnail.delete = function(userKey, httpOptions)
     var url = parse('/directory/v1/users/:userKey/photos/thumbnail', [userKey]);
     sys.logs.debug('[googleworkspace] DELETE from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options));
+    return httpService.delete(GoogleWorkspace(options));
 };
 
 exports.directory.users.delete = function(userKey, httpOptions) {
@@ -405,7 +405,7 @@ exports.directory.users.delete = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey', [userKey]);
     sys.logs.debug('[googleworkspace] DELETE from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options));
+    return httpService.delete(GoogleWorkspace(options));
 };
 
 exports.directory.users.undelete.post = function(userKey, httpOptions) {
@@ -416,7 +416,7 @@ exports.directory.users.undelete.post = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey/undelete', [userKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.users.aliases.post = function(userKey, httpOptions) {
@@ -427,7 +427,7 @@ exports.directory.users.aliases.post = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey/aliases', [userKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.users.aliases.get = function(userKey, httpOptions) {
@@ -438,7 +438,7 @@ exports.directory.users.aliases.get = function(userKey, httpOptions) {
     var url = parse('/directory/v1/users/:userKey/aliases', [userKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.users.aliases.delete = function(userKey, aliasId, httpOptions) {
@@ -449,7 +449,7 @@ exports.directory.users.aliases.delete = function(userKey, aliasId, httpOptions)
     var url = parse('/directory/v1/users/:userKey/aliases/:aliasId', [userKey, aliasId]);
     sys.logs.debug('[googleworkspace] DELETE from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options));
+    return httpService.delete(GoogleWorkspace(options));
 };
 
 exports.directory.customer.schemas.post = function(customerKey, httpOptions) {
@@ -460,7 +460,7 @@ exports.directory.customer.schemas.post = function(customerKey, httpOptions) {
     var url = parse('/directory/v1/customer/:customerKey/schemas', [customerKey]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.customer.schemas.put = function(customerKey, schemaKey, httpOptions) {
@@ -471,7 +471,7 @@ exports.directory.customer.schemas.put = function(customerKey, schemaKey, httpOp
     var url = parse('/directory/v1/customer/:customerKey/schemas/:schemaKey', [customerKey, schemaKey]);
     sys.logs.debug('[googleworkspace] PUT from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.put(Googleworkspace(options));
+    return httpService.put(GoogleWorkspace(options));
 };
 
 exports.directory.customer.schemas.get = function(customerKey, schemaKey, httpOptions) {
@@ -482,7 +482,7 @@ exports.directory.customer.schemas.get = function(customerKey, schemaKey, httpOp
     var url = parse('/directory/v1/customer/:customerKey/schemas/:schemaKey', [customerKey, schemaKey]);
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.customer.devices.mobile.get = function(customerKey, resourceId, httpOptions) {
@@ -517,7 +517,7 @@ exports.directory.customer.devices.mobile.get = function(customerKey, resourceId
     }
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.customer.devices.mobile.action.post = function(customerKey, resourceId, httpOptions) {
@@ -528,7 +528,7 @@ exports.directory.customer.devices.mobile.action.post = function(customerKey, re
     var url = parse('/directory/v1/customer/:customerKey/devices/mobile/:resourceId/action', [customerKey, resourceId]);
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.customer.devices.mobile.delete = function(customerKey, resourceId, httpOptions) {
@@ -539,7 +539,7 @@ exports.directory.customer.devices.mobile.delete = function(customerKey, resourc
     var url = parse('/directory/v1/customer/:customerKey/devices/mobile/:resourceId', [customerKey, resourceId]);
     sys.logs.debug('[googleworkspace] DELETE from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options));
+    return httpService.delete(GoogleWorkspace(options));
 };
 
 exports.datatransfer.applications.get = function(applicationId, httpOptions) {
@@ -565,7 +565,7 @@ exports.datatransfer.applications.get = function(applicationId, httpOptions) {
     }
     sys.logs.debug('[googleworkspace] GET from: ' + url);
 	var options = checkHttpOptions(url, httpOptions);
-	return httpService.get(Googleworkspace(options));
+	return httpService.get(GoogleWorkspace(options));
 };
 
 exports.datatransfer.transfers.get = function(dataTransferId, httpOptions) {
@@ -591,14 +591,14 @@ exports.datatransfer.transfers.get = function(dataTransferId, httpOptions) {
     }
     sys.logs.debug('[googleworkspace] GET from: ' + url);
 	var options = checkHttpOptions(url, httpOptions);
-	return httpService.get(Googleworkspace(options));
+	return httpService.get(GoogleWorkspace(options));
 };
 
 exports.datatransfer.transfers.post = function(httpOptions) {
     var url = parse('/datatransfer/v1/transfers');
     sys.logs.debug('[googleworkspace] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options));
+    return httpService.post(GoogleWorkspace(options));
 };
 
 exports.directory.groups.getAll.get = function(domain, customer, pageToken, httpOptions) {
@@ -612,7 +612,7 @@ exports.directory.groups.getAll.get = function(domain, customer, pageToken, http
     url = concatQuery(url, 'pageToken', encodeURIComponent(pageToken || ""));
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.groups.getAllByUser.get = function(userKey, nextPageToken, httpOptions) {
@@ -623,7 +623,7 @@ exports.directory.groups.getAllByUser.get = function(userKey, nextPageToken, htt
     url = concatQuery(url, 'pageToken', encodeURIComponent(nextPageToken || ""));
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.groups.members.paged.get = function(groupKey, pageToken, httpOptions) {
@@ -635,7 +635,7 @@ exports.directory.groups.members.paged.get = function(groupKey, pageToken, httpO
     url = concatQuery(url, 'pageToken', encodeURIComponent(pageToken || ""));
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.customer.orgunits.getAll.get = function(customerKey, orgUnitPath, httpOptions) {
@@ -650,7 +650,7 @@ exports.directory.customer.orgunits.getAll.get = function(customerKey, orgUnitPa
     url = concatQuery(url, 'type', "all");
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.users.getAllByDomain.get = function(domain, pageToken, httpOptions) {
@@ -661,7 +661,7 @@ exports.directory.users.getAllByDomain.get = function(domain, pageToken, httpOpt
     url = concatQuery(url, 'pageToken', encodeURIComponent(pageToken || ""));
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 exports.directory.users.getAllByCostumer.get = function(costumer, pageToken, httpOptions) {
@@ -672,7 +672,7 @@ exports.directory.users.getAllByCostumer.get = function(costumer, pageToken, htt
     url = concatQuery(url, 'pageToken', encodeURIComponent(pageToken || ""));
     sys.logs.debug('[googleworkspace] GET from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options));
+    return httpService.get(GoogleWorkspace(options));
 };
 
 /****************************************************
@@ -681,37 +681,37 @@ exports.directory.users.getAllByCostumer.get = function(costumer, pageToken, htt
 
 exports.get = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.get(Googleworkspace(options), callbackData, callbacks);
+    return httpService.get(GoogleWorkspace(options), callbackData, callbacks);
 };
 
 exports.post = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Googleworkspace(options), callbackData, callbacks);
+    return httpService.post(GoogleWorkspace(options), callbackData, callbacks);
 };
 
 exports.put = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.put(Googleworkspace(options), callbackData, callbacks);
+    return httpService.put(GoogleWorkspace(options), callbackData, callbacks);
 };
 
 exports.patch = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.patch(Googleworkspace(options), callbackData, callbacks);
+    return httpService.patch(GoogleWorkspace(options), callbackData, callbacks);
 };
 
 exports.delete = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.delete(Googleworkspace(options), callbackData, callbacks);
+    return httpService.delete(GoogleWorkspace(options), callbackData, callbacks);
 };
 
 exports.head = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.head(Googleworkspace(options), callbackData, callbacks);
+    return httpService.head(GoogleWorkspace(options), callbackData, callbacks);
 };
 
 exports.options = function(url, httpOptions, callbackData, callbacks) {
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.options(Googleworkspace(options), callbackData, callbacks);
+    return httpService.options(GoogleWorkspace(options), callbackData, callbacks);
 };
 
 exports.utils = {};
@@ -769,6 +769,7 @@ exports.utils.getConfiguration = function (property) {
     return config.get(property);
 };
 
+
 /****************************************************
  Private helpers
  ****************************************************/
@@ -810,7 +811,7 @@ var parse = function (str) {
         if (arguments.length > 1) {
             var args = arguments[1], i = 0;
             return str.replace(/(:(?:\w|-)+)/g, () => {
-                if (typeof (args[i]) != 'string') throw new Error('Invalid type of argument: [' + args[i] + '] for url [' + str + '].');
+                if (typeof (args[i]) != 'string' && typeof (args[i]) != 'number') throw new Error('Invalid type of argument: [' + args[i] + '] for url [' + str + '].');
                 return args[i++];
             });
         } else {
@@ -835,7 +836,7 @@ var GOOGLEWORKSPACE_API_AUTH_URL = "https://oauth2.googleapis.com/token";
  Configurator
  ****************************************************/
 
-var Googleworkspace = function (options) {
+var GoogleWorkspace = function (options) {
     options = options || {};
     options= setApiUri(options);
     options= setRequestHeaders(options);
@@ -856,12 +857,16 @@ function setApiUri(options) {
 
 function setRequestHeaders(options) {
     var headers = options.headers || {};
+
     sys.logs.debug('[googleworkspace] Setting header bearer');
     headers = mergeJSON(headers, {"Content-Type": "application/json"});
     headers = mergeJSON(headers, {"Authorization": "Bearer "+getAccessTokenForAccount()});
+
     if (headers.Accept === undefined || headers.Accept === null || headers.Accept === "") {
+        sys.logs.debug('[googleworkspace] Set header accept');
         headers = mergeJSON(headers, {"Accept": "application/json"});
     }
+
     options.headers = headers;
     return options;
 }
@@ -869,12 +874,12 @@ function setRequestHeaders(options) {
 function getAccessTokenForAccount(account) {
     account = account || "account";
     sys.logs.info('[googleworkspace] Getting access token for account: '+account);
-    var installationJson = sys.storage.get('installationInfo-Googleworkspace---'+account) || {id: null};
+    var installationJson = sys.storage.get('installationInfo-GoogleWorkspace---'+account) || {id: null};
     var token = installationJson.token || null;
     var expiration = installationJson.expiration || 0;
     if (!!token || expiration < new Date()) {
         sys.logs.info('[googleworkspace] Access token is expired or not found. Getting new token');
-        var res = dependencies.http.post(
+        var res = httpService.post(
             {
                 url: "https://oauth2.googleapis.com/token",
                 headers: {
@@ -887,10 +892,10 @@ function getAccessTokenForAccount(account) {
             });
         token = res.access_token;
         var expires_at = res.expires_in;
-        expiration = new Date(new Date(expires_at) - 1 * 60 * 1000);
+        expiration = new Date(new Date(expires_at) - 1 * 60 * 1000).getTime();
         installationJson = mergeJSON(installationJson, {"token": token, "expiration": expiration});
         sys.logs.info('[googleworkspace] Saving new token for account: ' + account);
-        sys.storage.replace('installationInfo-Googleworkspace---'+account, installationJson);
+        sys.storage.replace('installationInfo-GoogleWorkspace---'+account, installationJson);
     }
     return token;
 }
