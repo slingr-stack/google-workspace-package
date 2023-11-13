@@ -116,6 +116,7 @@ function stringToObject (obj) {
 	}
 	return null;
 }
+
 function setApiUri(options) {
 	var API_URL = config.get("GOOGLEWORKSPACE_API_BASE_URL");
 	var url = options.path || "";
