@@ -1,289 +1,167 @@
 {
-  "label": "API call to googleworkspace",
-  "name": "apiCallGoogleworkspace",
-  "category": "integrations",
-  "description": "This flow step will send generic request to googleworkspace",
-  "inputs": [
-    {
-      "label": "Url",
-      "name": "url",
-      "description": "The method and path to which this endpoint is to send requests in a generic way.",
-      "type": "urlParams",
-      "required": "true",
-      "options": {
-        "type": "dropDown",
-        "possibleValues": [
-            {
-              "label": "POST /directory/v1/groups"
-            },
-            {
-              "label": "POST /directory/v1/groups/{groupKey}/aliases"
-            },
-            {
-              "label": "POST /directory/v1/groups/{groupKey}/members"
-            },
-            {
-              "label": "POST /directory/v1/customer/{customerKey}/orgunits"
-            },
-            {
-              "label": "POST /directory/v1/customer/{customerKey}/roles"
-            },
-            {
-              "label": "POST /directory/v1/customer/{customerKey}/roleassignments"
-            },
-            {
-              "label": "POST /directory/v1/users"
-            },
-            {
-              "label": "POST /directory/v1/users/{userKey}/makeAdmin"
-            },
-            {
-              "label": "POST /directory/v1/users/{userKey}/undelete"
-            },
-            {
-              "label": "POST /directory/v1/users/{userKey}/aliases"
-            },
-            {
-              "label": "POST /directory/v1/customer/{customerKey}/schemas"
-            },
-            {
-              "label": "POST /directory/v1/customer/{customerKey}/devices/mobile/{resourceId}/action"
-            },
-            {
-              "label": "POST /datatransfer/v1/transfers"
-            },
-            {
-              "label": "PUT /directory/v1/groups/{groupKey}"
-            },
-            {
-              "label": "PUT /directory/v1/groups/{groupKey}/members/{memberKey}"
-            },
-            {
-              "label": "PUT /directory/v1/customer/{customerKey}/orgunits/{orgUnitPath}"
-            },
-            {
-              "label": "PUT /directory/v1/customers/{customerKey}"
-            },
-            {
-              "label": "PUT /directory/v1/users/{userKey}"
-            },
-            {
-              "label": "PUT /directory/v1/users/{userKey}/photos/thumbnail"
-            },
-            {
-              "label": "PUT /directory/v1/customer/{customerKey}/schemas/{schemaKey}"
-            },
-            {
-              "label": "GET /directory/v1/groups/{groupKey}"
-            },
-            {
-              "label": "GET /directory/v1/groups/{groupKey}/aliases"
-            },
-            {
-              "label": "GET /directory/v1/groups/{groupKey}/members/{memberKey}"
-            },
-            {
-              "label": "GET /directory/v1/customer/{customerKey}/orgunits/{orgUnitPath}"
-            },
-            {
-              "label": "GET /directory/v1/customer/{customerKey}/roles/ALL/privileges"
-            },
-            {
-              "label": "GET /directory/v1/customer/{customerKey}/roles"
-            },
-            {
-              "label": "GET /directory/v1/customers/{customerKey}"
-            },
-            {
-              "label": "GET /directory/v1/users/{userKey}"
-            },
-            {
-              "label": "GET /directory/v1/users/{userKey}/photos/thumbnail"
-            },
-            {
-              "label": "GET /directory/v1/users/{userKey}/aliases"
-            },
-            {
-              "label": "GET /directory/v1/customer/{customerKey}/schemas/{schemaKey}"
-            },
-            {
-              "label": "GET /directory/v1/customer/{customerKey}/devices/mobile"
-            },
-            {
-              "label": "GET /directory/v1/customer/{customerKey}/devices/mobile/{resourceId}"
-            },
-            {
-              "label": "GET /datatransfer/v1/applications"
-            },
-            {
-              "label": "GET /datatransfer/v1/applications/{applicationId}"
-            },
-            {
-              "label": "GET /datatransfer/v1/transfers"
-            },
-            {
-              "label": "GET /datatransfer/v1/transfers/{dataTransferId}"
-            },
-            {
-              "label": "GET /directory/v1/groups/{domain}/{customer}/{pageToken}"
-            },
-            {
-              "label": "GET /directory/v1/groups/{userKey}/{nextPageToken}"
-            },
-            {
-              "label": "GET /directory/v1/groups/{groupKey}/members/{pageToken}"
-            },
-            {
-              "label": "GET /directory/v1/customer/{customerKey}/orgunits/{orgUnitPath}"
-            },
-            {
-              "label": "GET /directory/v1/users/{domain}/{pageToken}"
-            },
-            {
-              "label": "GET /directory/v1/users/{costumer}/{pageToken}"
-            },
-            {
-              "label": "DELETE /directory/v1/groups/{groupKey}/aliases/{aliasId}"
-            },
-            {
-              "label": "DELETE /directory/v1/groups/{groupKey}"
-            },
-            {
-              "label": "DELETE /directory/v1/groups/{groupKey}/members/{memberKey}"
-            },
-            {
-              "label": "DELETE /directory/v1/customer/{customerKey}/orgunits/{orgUnitPath}"
-            },
-            {
-              "label": "DELETE /directory/v1/users/{userKey}/photos/thumbnail"
-            },
-            {
-              "label": "DELETE /directory/v1/users/{userKey}"
-            },
-            {
-              "label": "DELETE /directory/v1/users/{userKey}/aliases/{aliasId}"
-            },
-            {
-              "label": "DELETE /directory/v1/customer/{customerKey}/devices/mobile/{resourceId}"
-            }
-        ]
-      }
-    },
-    {
-      "label": "Headers",
-      "name": "headers",
-      "description": "Let the client and the server pass additional information with the HTTP request in a key value format. (e.g. key=ABC123)",
-      "type": "keyValue"
-    },
-    {
-      "label": "Query Params",
-      "name": "params",
-      "description": "Parameters attached to the end of a url in a key value format. (e.g. key=ABC123)",
-      "type": "keyValue"
-    },
-    {
-      "label": "Body",
-      "name": "body",
-      "type": "json",
-      "description": "Content to be sent to the server.",
-      "options": {
-        "allowContextSelector": "true"
-      }
-    },
-    {
-      "label": "Override Settings",
-      "name": "overrideSettings",
-      "type": "boolean",
-      "description": "If true, allows adding configurations",
-      "defaultValue": false,
-      "options": {
-        "allowContextSelector": "false"
-      }
-    },
-    {
-      "label": "Follow Redirects",
-      "name": "followRedirects",
-      "type": "boolean",
-      "description": "Follow the redirects when a HTTP request is executed",
-      "visibility": "config.overrideSettings",
-      "defaultValue": false,
-      "options": {
-        "allowContextSelector": "false"
-      }
-    },
-    {
-      "label": "Download",
-      "name": "download",
-      "type": "boolean",
-      "description": "Indicates that the resource has to be downloaded into a file instead of returning it in the response.",
-      "visibility": "config.overrideSettings && config.events != \"fileDownloaded\"",
-      "defaultValue": false,
-      "options": {
-        "allowContextSelector": "false"
-      }
-    },
-    {
-      "label": "File Name",
-      "name": "fileName",
-      "description": "If provided, the file will be stored with this name. If empty the file name will be calculated from the URL.",
-      "visibility": "(config.overrideSettings && config.download) || config.events === \"fileDownloaded\"",
-      "type": "text",
-      "options": {
-        "allowContextSelector": "true"
-      }
-    },
-    {
-      "label": "Full Response",
-      "name": "fullResponse",
-      "type": "boolean",
-      "description": "Include extended information about response",
-      "visibility": "config.overrideSettings",
-      "defaultValue": false,
-      "options": {
-        "allowContextSelector": "false"
-      }
-    },
-    {
-      "label": "Connection timeout",
-      "name": "connectionTimeout",
-      "description": "Connect timeout interval, in milliseconds (0 = infinity). Default value: 5000 ms (5 sec)",
-      "visibility": "config.overrideSettings",
-      "type": "text",
-      "defaultValue": "5000",
-      "typeOptions": {
-        "validation": {
-          "function": "!config.connectionTimeout || utils.isPlaceholder(config.connectionTimeout) || utils.getInteger(config.connectionTimeout) >= 0",
-          "message": "The time must be a valid placeholder or a positive integer greater than or equal to 0. "
-        }
-      },
-      "options": {
-        "allowContextSelector": "false"
-      }
-    },
-    {
-      "label": "Read timeout",
-      "name": "readTimeout",
-      "description": "Read timeout interval, in milliseconds (0 = infinity). Default value: 60000 ms (60 sec)",
-      "visibility": "config.overrideSettings",
-      "type": "text",
-      "defaultValue": "60000",
-      "typeOptions": {
-        "validation": {
-          "function": "!config.readTimeout || utils.isPlaceholder(config.readTimeout) || utils.getInteger(config.readTimeout) >= 0",
-          "message": "The time must be a valid placeholder or a positive integer greater than or equal to 0. "
-        }
-      },
-      "options": {
-        "allowContextSelector": "false"
-      }
-    }
-  ],
-  "outputs": [
-    {
-      "label": "Response",
-      "name": "response",
-      "type": "object",
-      "description": "The response to external URL"
-    }
-  ]
+	"label": "API call to googleworkspace",
+	"name": "apiCallGoogleworkspace",
+	"category": "integrations",
+	"description": "This flow step will send generic request to googleworkspace",
+	"inputs": [
+		{
+			"label": "Method",
+			"name": "method",
+			"description": "The method to which this service will send the request.",
+			"type": "dropDown",
+			"multiplicity": "one",
+			"required": "true",
+			"defaultValue": "get",
+			"options": {
+				"possibleValues": [
+					{
+						"label": "GET",
+						"name": "get"
+					},
+					{
+						"label": "POST",
+						"name": "post"
+					},
+					{
+						"label": "PUT",
+						"name": "put"
+					},
+					{
+						"label": "DELETE",
+						"name": "delete"
+					},
+					{
+						"label": "PATCH",
+						"name": "patch"
+					},
+					{
+						"label": "OPTIONS",
+						"name": "options"
+					},
+					{
+						"label": "HEAD",
+						"name": "head"
+					}
+				],
+				"allowContextSelector": "false"
+			}
+		},
+		{
+			"label": "Path",
+			"name": "path",
+			"description": "The URL to which this service will send the request.",
+			"type": "urlParams",
+			"required": "true"
+		},
+		{
+			"label": "Query Params",
+			"name": "params",
+			"description": "Parameters attached to the end of a url in a key value format. (e.g. key=ABC123)",
+			"type": "keyValue"
+		},
+		{
+			"label": "Body",
+			"name": "body",
+			"type": "json",
+			"description": "Content to be sent to the server.",
+			"options": {
+				"allowContextSelector": "true"
+			}
+		},
+		{
+			"label": "Override Settings",
+			"name": "overrideSettings",
+			"type": "boolean",
+			"description": "If true, allows adding configurations",
+			"defaultValue": false,
+			"options": {
+				"allowContextSelector": "false"
+			}
+		},
+		{
+			"label": "Follow Redirects",
+			"name": "followRedirects",
+			"type": "boolean",
+			"description": "Follow the redirects when a HTTP request is executed",
+			"visibility": "config.overrideSettings",
+			"defaultValue": false,
+			"options": {
+				"allowContextSelector": "false"
+			}
+		},
+		{
+			"label": "Download",
+			"name": "download",
+			"type": "boolean",
+			"description": "Indicates that the resource has to be downloaded into a file instead of returning it in the response.",
+			"visibility": "config.overrideSettings && config.events != \"fileDownloaded\"",
+			"defaultValue": false,
+			"options": {
+				"allowContextSelector": "false"
+			}
+		},
+		{
+			"label": "File Name",
+			"name": "fileName",
+			"description": "If provided, the file will be stored with this name. If empty the file name will be calculated from the URL.",
+			"visibility": "(config.overrideSettings && config.download) || config.events === \"fileDownloaded\"",
+			"type": "text",
+			"options": {
+				"allowContextSelector": "true"
+			}
+		},
+		{
+			"label": "Full Response",
+			"name": "fullResponse",
+			"type": "boolean",
+			"description": "Include extended information about response",
+			"visibility": "config.overrideSettings",
+			"defaultValue": false,
+			"options": {
+				"allowContextSelector": "false"
+			}
+		},
+		{
+			"label": "Connection timeout",
+			"name": "connectionTimeout",
+			"description": "Connect timeout interval, in milliseconds (0 = infinity). Default value: 5000 ms (5 sec)",
+			"visibility": "config.overrideSettings",
+			"type": "text",
+			"defaultValue": "5000",
+			"typeOptions": {
+				"validation": {
+					"function": "!config.connectionTimeout || utils.isPlaceholder(config.connectionTimeout) || utils.getInteger(config.connectionTimeout) >= 0",
+					"message": "The time must be a valid placeholder or a positive integer greater than or equal to 0. "
+				}
+			},
+			"options": {
+				"allowContextSelector": "false"
+			}
+		},
+		{
+			"label": "Read timeout",
+			"name": "readTimeout",
+			"description": "Read timeout interval, in milliseconds (0 = infinity). Default value: 60000 ms (60 sec)",
+			"visibility": "config.overrideSettings",
+			"type": "text",
+			"defaultValue": "60000",
+			"typeOptions": {
+				"validation": {
+					"function": "!config.readTimeout || utils.isPlaceholder(config.readTimeout) || utils.getInteger(config.readTimeout) >= 0",
+					"message": "The time must be a valid placeholder or a positive integer greater than or equal to 0. "
+				}
+			},
+			"options": {
+				"allowContextSelector": "false"
+			}
+		}
+	],
+	"outputs": [
+		{
+			"label": "Response",
+			"name": "response",
+			"type": "object",
+			"description": "The response to external URL"
+		}
+	]
 }
