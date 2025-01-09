@@ -5,28 +5,72 @@
         {
             "type": "service",
             "name": "http",
-            "version": "v1.2.6",
+            "version": "v1.7.0",
             "instanceId": "shared"
+        },
+        {
+            "type": "package",
+            "name": "oauth",
+            "version": "v1.0.34"
         }
     ],
+    "configurationBuilder": "/configurationBuilder.js",
     "configuration": [
+        {
+            "name": "authenticationMethod",
+            "label": "Authentication Method",
+            "required": true,
+            "defaultValue": "oAuth2",
+            "type": "buttonsGroup",
+            "typeOptions": {
+                "allowCustom": false,
+                "possibleValues": [
+                    {
+                        "label": "Service Account",
+                        "name": "serviceAccount"
+                    },
+                    {
+                        "label": "OAuth 2.0",
+                        "name": "oAuth2"
+                    }
+                ]
+            }
+        },
         {
             "name": "serviceAccountEmail",
             "label": "Service Account Email",
             "description": "The email from service account created",
             "type": "text",
-            "required": true
+            "required": "config.authenticationMethod == 'serviceAccount'",
+            "visibility": "config.authenticationMethod == 'serviceAccount'"
         },
         {
             "name": "privateKey",
             "label": "Private Key",
             "description": "The private key associated to the service account",
             "type": "password",
-            "required": true
+            "required": "config.authenticationMethod == 'serviceAccount'",
+            "visibility": "config.authenticationMethod == 'serviceAccount'"
         },
         {
-            "label": "Auth Scopes",
-            "name": "authScopes",
+            "label": "Client Id",
+            "name": "clientId",
+            "description": "The ID for your client application registered with the API provider.",
+            "required": "true",
+            "type": "text",
+            "visibility": "config.authenticationMethod == 'oAuth2'"
+        },
+        {
+            "label": "Client Secret",
+            "name": "clientSecret",
+            "description": "The client secret given to you by the API provider",
+            "required": "config.authenticationMethod == 'oAuth2'",
+            "type": "text",
+            "visibility": "config.authenticationMethod == 'oAuth2'"
+        },
+        {
+            "label": "Scope",
+            "name": "scope",
             "description": "The auth scopes the service accounts have, if you select scopes that don't belong to your service account it will lead to authorization errors",
             "type": "dropDown",
             "multiplicity": "many",
@@ -146,9 +190,9 @@
             "path": "/scripts/api.js"
         },
         {
-            "type": "flowStep",
-            "namespace": "apiCallGoogleworkspace",
-            "path": "/flowSteps/apiCallGoogleworkspace"
+            "type": "script",
+            "namespace": "utils",
+            "path": "/scripts/utils.js"
         }
     ]
 }
