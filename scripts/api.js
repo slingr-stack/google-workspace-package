@@ -134,37 +134,6 @@ exports.delete = function(path, httpOptions, callbackData, callbacks) {
     return httpService.delete(GoogleWorkspace(options), callbackData, callbacks);
 };
 
-/**
- * Verifies the signature of the given body using the provided signature coded in sha1 or sha256.
- *
- * @param {string} body                 - The body to be verified.
- * @param {string} signature            - The signature to be checked.
- * @param {string} signature256         - The signature256 to be checked.
- * @return {boolean}                    - True if the signature is valid, false otherwise.
- */
-exports.utils.verifySignature = function (body, signature, signature256) {
-    sys.logs.info("Checking signature");
-    let verified = true;
-    let verified256 = true;
-    let secret = config.get("webhookSecret");
-    if (!body || body === "") {
-        sys.logs.warn("The body is null or empty");
-        return false;
-    }
-    if (!secret || secret === "" || !signature || signature === "" ||
-        !sys.utils.crypto.verifySignatureWithHmac(body, signature.replace("sha1=",""), secret, "HmacSHA1")) {
-        sys.logs.warn("Invalid signature sha1");
-        verified = false;
-    }
-    if (!secret || secret === "" ||  !signature256 ||!signature256 ||
-        !sys.utils.crypto.verifySignatureWithHmac(body, signature.replace("sha256=",""), secret, "HmacSHA256")) {
-        sys.logs.warn("Invalid signature sha 256");
-        verified256 = false;
-    }
-
-    return (verified || verified256);
-};
-
 /****************************************************
  Private helpers
  ****************************************************/
@@ -281,27 +250,24 @@ function getAccessTokenForAccount() {
 }
 
 function getJsonWebToken() {
-    let currentTime = new Date().getTime();
-    let futureTime = new Date(currentTime + ( 10 * 60 * 1000)).getTime();
-    let scopeProp= config.get("scope");
-    let scopes;
-    if (!!scopeProp) {
-        scopes = scopeProp.map(function (s) {
-            return "https://www.googleapis.com/auth/admin." + s;
-        });
+    try{
+        let currentTime = new Date().getTime();
+        let futureTime = new Date(currentTime + ( 10 * 60 * 1000)).getTime();
+        let scopes = config.get("scope");
+        return sys.utils.crypto.jwt.generate(
+            {
+                iss: config.get("serviceAccountEmail"),
+                aud: GOOGLEWORKSPACE_API_AUTH_URL,
+                scope: scopes,
+                iat: currentTime,
+                exp: futureTime
+            },
+            config.get("privateKey"),
+            "RS256"
+        );
+    } catch (error) {
+        sys.logs.error("[googleworkspace] Error generating JWT: ", error);
     }
-    let scopesGlobal = scopes.join(" ");
-    return sys.utils.crypto.jwt.generate(
-        {
-            iss: config.get("serviceAccountEmail"),
-            aud: GOOGLEWORKSPACE_API_AUTH_URL,
-            scope: scopesGlobal,
-            iat: currentTime,
-            exp: futureTime
-        },
-        config.get("privateKey"),
-        "RS256"
-    )
 }
 
 function mergeJSON (json1, json2) {
