@@ -76,6 +76,13 @@
             "type": "text"
         },
         {
+            "name": "oauthCallback",
+            "label": "OAuth callback",
+            "description": "The OAuth callback to configure in your Google Drive App",
+            "type": "label",
+            "value": "config.AUTH_CALLBACK_URL+'/authCallback'"
+        },
+        {
             "name": "GOOGLEWORKSPACE_API_BASE_URL",
             "label": "Googleworkspace Api Url",
             "type": "label",
