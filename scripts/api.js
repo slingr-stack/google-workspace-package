@@ -8,7 +8,7 @@ let httpDependency = {
     get: httpReference.get,
     post: httpReference.post,
     put: httpReference.put,
-    delete: httpReference.delete,
+    delete: httpReference.delete
 };
 
 let httpService = {};

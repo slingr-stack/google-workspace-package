@@ -1,6 +1,6 @@
 {
     "name": "googleworkspace",
-    "label": "Google Workspace Package",
+    "label": "Google Workspace",
     "dependencies": [
         {
             "type": "service",
