@@ -115,6 +115,7 @@ There are no events for this package.
 
 ## Dependencies
 * HTTP Service (Latest Version)
+* Oauth Package
 
 # About Slingr
 
