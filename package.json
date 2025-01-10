@@ -56,7 +56,7 @@
             "label": "Client Id",
             "name": "clientId",
             "description": "The ID for your client application registered with the API provider.",
-            "required": "true",
+            "required": "config.authenticationMethod == 'oAuth2'",
             "type": "text",
             "visibility": "config.authenticationMethod == 'oAuth2'"
         },
@@ -78,9 +78,9 @@
         {
             "name": "oauthCallback",
             "label": "OAuth callback",
-            "description": "The OAuth callback to configure in your Google Drive App",
+            "description": "The OAuth callback to configure in your Google Workspace App",
             "type": "label",
-            "value": "config.AUTH_CALLBACK_URL+'/authCallback'"
+            "value":  "config.AUTH_CALLBACK_URL+'/authCallback'"
         },
         {
             "name": "GOOGLEWORKSPACE_API_BASE_URL",
