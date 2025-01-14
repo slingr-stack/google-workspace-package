@@ -9,7 +9,7 @@
         service: 'http',
         event: 'webhook',
         matching: {
-            path: '/googleWorkspace',
+            path: '/googleworkspace',
         }
     },
     callback: function(event) {
