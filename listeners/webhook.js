@@ -3,7 +3,7 @@
  ****************************************************/
 
  listeners.defaultWebhookGoogleWorkspace = {
-    label: 'Catch HTTP google workspace events',
+    label: 'Catch HTTP Google Workspace events',
     type: 'service',
     options: {
         service: 'http',
