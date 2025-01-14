@@ -8,6 +8,7 @@ let httpDependency = {
     get: httpReference.get,
     post: httpReference.post,
     put: httpReference.put,
+    patch: httpReference.patch,
     delete: httpReference.delete
 };
 
@@ -118,6 +119,20 @@ exports.post = function(path, httpOptions, callbackData, callbacks) {
 exports.put = function(path, httpOptions, callbackData, callbacks) {
     let options = checkHttpOptions(path, httpOptions);
     return httpService.put(GoogleWorkspace(options), callbackData, callbacks);
+};
+
+/**
+ * Sends an HTTP PATCH request to the specified URL with the provided HTTP options.
+ *
+ * @param {string} path         - The path to send the PATCH request to.
+ * @param {object} httpOptions  - The options to be included in the PATCH request check http-service documentation.
+ * @param {object} callbackData - Additional data to be passed to the callback functions. [optional]
+ * @param {object} callbacks    - The callback functions to be called upon completion of the POST request. [optional]
+ * @return {object}             - The response of the PATCH request.
+ */
+exports.patch = function(path, httpOptions, callbackData, callbacks) {
+    let options = checkHttpOptions(path, httpOptions);
+    return httpService.patch(GoogleWorkspace(options), callbackData, callbacks);
 };
 
 /**

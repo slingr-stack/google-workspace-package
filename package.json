@@ -76,6 +76,13 @@
             "type": "text"
         },
         {
+            "name": "webhooksUrl",
+            "label": "Webhooks URL",
+            "description": "The URL to configure in webhooks of your Google Workspace App",
+            "type": "label",
+            "value": "config.WEBHOOK_URL"
+        },
+        {
             "name": "oauthCallback",
             "label": "OAuth callback",
             "description": "The OAuth callback to configure in your Google Workspace App",
@@ -84,7 +91,7 @@
         },
         {
             "name": "GOOGLEWORKSPACE_API_BASE_URL",
-            "label": "Googleworkspace Api Url",
+            "label": "Google Workspace API URL",
             "type": "label",
             "value": "https://admin.googleapis.com/admin"
         }
@@ -100,6 +107,11 @@
             "type": "script",
             "namespace": "utils",
             "path": "/scripts/utils.js"
+        },
+        {
+            "type": "listener",
+            "namespace": "webhook",
+            "path": "/listeners/webhook.js"
         }
     ]
 }

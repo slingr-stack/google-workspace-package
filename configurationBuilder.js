@@ -16,7 +16,6 @@ let configurationBuilder = function (config) {
             scope: config.scope,
             oauthCallback: config.oauthCallback
         };
-        sys.logs.debug("[googleworkspace] Configuration builder: " + JSON.stringify(config));
     }
     return config;
 }

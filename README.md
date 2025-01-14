@@ -1,5 +1,8 @@
 # Overview
 
+Repo: [https://github.com/slingr-stack/google-workspace-package](https://github.com/slingr-stack/google-workspace-package)
+
+
 This package allows direct access to the [Google Admin Console,
 specifically Directory API](https://developers.google.com/admin-sdk/directory/reference/rest).
 However, it provides shortcuts and helpers for most common use cases.
@@ -8,6 +11,7 @@ Some features available in this package are:
 
 - Authentication and authorization
 - Direct access to the Google Admin Console Directory API
+- Listener that catch incoming webhooks from Google Admin Console
 
 ## Configuration
 
@@ -16,7 +20,7 @@ by following these instructions:
 
 - Create a Google Cloud project for your Google Workspace app.
 - Enable the Admin SDK API in your Google Cloud project.
-- Create a service account and credentials and delegate domain-wide authority to it (assign ONLY the necessary scopes to your service account)[Click here for the instructions](https://developers.google.com/admin-sdk/directory/v1/guides/delegation).
+- Create a service account and credentials and delegate domain-wide authority to it (assign ONLY the necessary scopes to your service account) [Click here for the instructions](https://developers.google.com/admin-sdk/directory/v1/guides/delegation).
 - Download the JSON file with the service account credentials to get the service account private key.
   
 Otherwise, if you plan to use OAuth 2.0 authentication method:
@@ -27,7 +31,7 @@ Otherwise, if you plan to use OAuth 2.0 authentication method:
 
 
 #### Authentication Method
-Allows to choose between Account Service and OAuth 2.0 authorization methods.
+Allows you to choose between Account Service and OAuth 2.0 authorization methods.
 
 **Name**: `authenticationMethod`
 **Type**: buttonsGroup
@@ -41,7 +45,7 @@ The email created for the service account, it shows up when Service Account auth
 **Mandatory**: true
 
 #### Private Key
-The private key associated to the service account, it shows up when Service Account authorization method is enabled.
+The private key associated with the service account, it shows up when Service Account authorization method is enabled.
 
 **Name**: `privateKey`
 **Type**: password
@@ -67,7 +71,13 @@ The OAuth callback to configure in your Google Admin SDK App. it shows up when O
 **Name**: `oauthCallback`
 **Type**: label
 
-#### Googleworkspace Api Url
+#### Webhooks URL
+The URL to configure in webhooks of your Google Drive App.
+
+**Name**: `webhooksUrl`
+**Type**: label
+
+#### Google Workspace API URL
 The URL of the Google Admin SDK API where the requests are performed.
 
 **Name**: `GOOGLEWORKSPACE_API_BASE_URL`
@@ -75,9 +85,8 @@ The URL of the Google Admin SDK API where the requests are performed.
 
 ### OAuth Scopes
 
-The scopes the service account have access to.
-Take into account
-Note that the client must have access to the admin sdk resources. If you try to access to a resource that the user does not own
+The scopes the service account has access to.
+Note that the client must have access to the admin sdk resources. If you try to access to a resource that the user does not own,
 the request will result in a 404 or 403 unauthorized error.
 
 ### Storage Value And Offline Mode
@@ -93,15 +102,15 @@ If you have enabled the `OAuth 2.0` authorization method, the same method is use
 The Google service will return an object containing both the access token and the refresh token. Each token will be stored in the app's storage (accessible via the Monitor), where you can view them encrypted and associated with the user by ID.
 
 
-# Javascript API
+# JavaScript API
 
 ## HTTP requests
-You can make `POST`,`PUT`,`GET`,`DELETE` requests to the [googleworkspace API](https://admin.googleapis.com/admin) like this:
+You can make `POST`,`PUT`,`GET`, `PATCH` and `DELETE` requests to the [Google Workspace API](https://developers.google.com/admin-sdk/overview?hl=es-419) like this:
 ```javascript
-var response = pkg.googleworkspace.api.post('/directory/v1/groups', body)
-var response = pkg.googleworkspace.api.post('/directory/v1/groups')
-var response = pkg.googleworkspace.api.put('/directory/v1/users/:userKey/photos/thumbnail', body)
-var response = pkg.googleworkspace.api.put('/directory/v1/users/:userKey/photos/thumbnail')
+var response = pkg.googleworkspace.api.post('/directory/v1/groups', {"email": "newgroup@slingr.io"})
+var response = pkg.googleworkspace.api.get('/directory/v1/groups')
+var response = pkg.googleworkspace.api.put('/directory/v1/users/:userKey/photos/thumbnail', {"photoData": "Base64EncodedData"})
+var response = pkg.googleworkspace.api.patch('/directory/v1/users/:userKey/photos/thumbnail', {"etag": "eTag","photoData": "Base64EncodedData"})
 var response = pkg.googleworkspace.api.get('/directory/v1/users/:userKey')
 var response = pkg.googleworkspace.api.delete('/directory/v1/users/:userKey')
 ```
@@ -111,10 +120,31 @@ for more information about generic requests.
 
 ## Events
 
-There are no events for this package.
+### Webhook
+
+Incoming webhook events are automatically captured by the default listener named `Catch HTTP Google Workspace events`, which can be found below the `Scripts` section.
+Alternatively, you have the option to create a new package listener. For more information, please refer to the [Listeners Documentation](https://platform-docs.slingr.io/dev-reference/data-model-and-logic/listeners/).
+Please take a look at the Google Workspace documentation of the [Webhooks](https://developers.google.com/admin-sdk/directory/v1/guides/push?hl=es-419) for more information.
+
+### Subscribes to users changes to receive webhooks
+
+```javascript
+let bodey = {
+    "id": "01234567-89ab-cdef-0123456789ab", // Your channel ID.
+        "type": "web_hook",
+        "address": "https://mydomain.com/notifications", // Your receiving URL.
+...
+    "token": "target=myApp-myFilesChannelDest", // (Optional) Your channel token.
+        "params": {
+        "ttl": 3600 // (Optional) Your requested time-to-live for this channel.
+    }
+}
+const response = pkg.googledrive.api.post('/directory/v1/users/watch', body);
+```
+Once you make this request you will start to receive webhooks when your organization users are modified.
 
 ## Dependencies
-* HTTP Service (Latest Version)
+* HTTP Service
 * Oauth Package
 
 # About Slingr
