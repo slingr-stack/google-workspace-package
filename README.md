@@ -129,7 +129,7 @@ Please take a look at the Google Workspace documentation of the [Webhooks](https
 ### Subscribes to users changes to receive webhooks
 
 ```javascript
-let bodey = {
+let body = {
     "id": "01234567-89ab-cdef-0123456789ab", // Your channel ID.
         "type": "web_hook",
         "address": "https://mydomain.com/notifications", // Your receiving URL.
