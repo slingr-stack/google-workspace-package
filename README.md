@@ -114,6 +114,12 @@ var response = pkg.googleworkspace.api.patch('/directory/v1/users/:userKey/photo
 var response = pkg.googleworkspace.api.get('/directory/v1/users/:userKey')
 var response = pkg.googleworkspace.api.delete('/directory/v1/users/:userKey')
 ```
+#### Note on 400 Errors for GET Requests:
+When making GET requests to list resources (e.g., users, groups), a 400 - Bad Request error may occur if required parameters are missing. This typically happens when listing resources without including necessary filters or query parameters.
+
+Recommendation:
+Ensure you include the appropriate parameters (e.g., domain, customer, maxResults, pageToken) to avoid this error.
+Refer to the Google Directory API documentation for specific parameter details per resource.
 
 Please take a look at the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)
 for more information about generic requests.

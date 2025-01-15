@@ -96,7 +96,13 @@
             "value": "https://admin.googleapis.com/admin"
         }
     ],
-    "events": [],
+    "events": [
+        {
+            "label": "Webhook",
+            "name": "webhook",
+            "description": "Happens when Google Workspace sends a webhook to the package."
+        }
+    ],
     "metadata": [
         {
             "type": "script",
