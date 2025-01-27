@@ -14,7 +14,6 @@
     },
     callback: function(event) {
         sys.logs.info('[googleworkspace] Received Google Workspace webhook. Processing and triggering a package event.', event);
-        sys.logs.info('[googleworkspace] Triggering google Workspace event [webhook]');
         sys.events.triggerEvent('googleworkspace:webhook', event.data);
     }
 };
