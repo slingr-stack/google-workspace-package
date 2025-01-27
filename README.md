@@ -1,33 +1,17 @@
-<table class="table" style="margin-top: 10px">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Last Updated</th>
-        <th>Summary</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Google Workspace package</td>
-        <td>November 13, 2023</td>
-        <td>Detailed description of the API of the Google Workspace Admin Console package.</td>
-    </tr>
-    </tbody>
-</table>
-
 # Overview
 
+Repo: [https://github.com/slingr-stack/google-workspace-package](https://github.com/slingr-stack/google-workspace-package)
+
+
 This package allows direct access to the [Google Admin Console,
-specifically Directory API](https://developers.google.com/admin-sdk/directory/reference/rest)
-by impersonating a workspace admin user through a service account.
+specifically Directory API](https://developers.google.com/admin-sdk/directory/reference/rest).
 However, it provides shortcuts and helpers for most common use cases.
 
 Some features available in this package are:
 
 - Authentication and authorization
 - Direct access to the Google Admin Console Directory API
-- Helpers for API methods
-- Flow Steps for common use cases
+- Listener that catch incoming webhooks from Google Admin Console
 
 ## Configuration
 
@@ -36,296 +20,142 @@ by following these instructions:
 
 - Create a Google Cloud project for your Google Workspace app.
 - Enable the Admin SDK API in your Google Cloud project.
-- Create a service account and credentials and delegate domain-wide authority to it (assign ONLY the necessary scopes to your service account)[Click here for the instructions](https://developers.google.com/admin-sdk/directory/v1/guides/delegation).
+- Create a service account and credentials and delegate domain-wide authority to it (assign ONLY the necessary scopes to your service account) [Click here for the instructions](https://developers.google.com/admin-sdk/directory/v1/guides/delegation).
 - Download the JSON file with the service account credentials to get the service account private key.
+  
+Otherwise, if you plan to use OAuth 2.0 authentication method:
 
-### Service account email
+- Enable the Admin SDK API in your Google Cloud project.
+- Create a Client ID OAuth 2.0 account.
+- Copy the Client ID and Client Secret of the package.
 
-As explained above, this value comes from the credential file.
+
+#### Authentication Method
+Allows you to choose between Account Service and OAuth 2.0 authorization methods.
+
+**Name**: `authenticationMethod`
+**Type**: buttonsGroup
+**Mandatory**: true
+
+#### Service Account Email
+The email created for the service account, it shows up when Service Account authorization method is enabled.
+
+**Name**: `serviceAccountEmail`
+**Type**: text
+**Mandatory**: true
+
+#### Private Key
+The private key associated with the service account, it shows up when Service Account authorization method is enabled.
+
+**Name**: `privateKey`
+**Type**: password
+**Mandatory**: true
+
+#### Client ID
+The ID for your client application registered with the API provider, it shows up when OAuth 2.0 authorization method is enabled.
+
+**Name**: `clientId`
+**Type**: text
+**Mandatory**: true
+
+#### Client Secret
+The client secret given to you by the API provider, it shows up when OAuth 2.0 authorization method is enabled.
+
+**Name**: `clientSecret`
+**Type**: password
+**Mandatory**: true
+
+#### OAuth Callback
+The OAuth callback to configure in your Google Admin SDK App. it shows up when OAuth 2.0 authorization method is enabled.
+
+**Name**: `oauthCallback`
+**Type**: label
+
+#### Webhooks URL
+The URL to configure in webhooks of your Google Drive App.
+
+**Name**: `webhooksUrl`
+**Type**: label
+
+#### Google Workspace API URL
+The URL of the Google Admin SDK API where the requests are performed.
+
+**Name**: `GOOGLEWORKSPACE_API_BASE_URL`
+**Type**: label
 
 ### OAuth Scopes
 
-The scopes the service account have access to.
-Take into account
-if any scope is selected to which the service account does not have access, the package will fail
-to be authorized to make any requests.
+The scopes the service account has access to.
+Note that the client must have access to the admin sdk resources. If you try to access to a resource that the user does not own,
+the request will result in a 404 or 403 unauthorized error.
 
-### Private Key
+### Storage Value And Offline Mode
 
-As explained above, this value also comes from the credential file.
+By default, the `Service Account` authorization method is used. When using this method, you can directly call the following method to retrieve the access token, without requiring any additional actions:
 
-# Javascript API
+`pkg.googleworkspace.api.getAccessToken();`
 
-The Javascript API of the googleworkspace package has two pieces:
+This will return the access token, which will be securely stored in the application's storage and associated with a user by their ID.
 
-- **HTTP requests**
-- **Flow steps**
+If you have enabled the `OAuth 2.0` authorization method, the same method is used. The difference is that the Google Workspace package includes the `&access_type=offline` parameter, which allows the application to request a refresh token. This happens when calling the UI service (which should run during runtime, for example, by invoking the method within an action) to log in to the application.
+
+The Google service will return an object containing both the access token and the refresh token. Each token will be stored in the app's storage (accessible via the Monitor), where you can view them encrypted and associated with the user by ID.
+
+
+# JavaScript API
 
 ## HTTP requests
-You can make `POST`,`PUT`,`GET`,`DELETE` requests to the [googleworkspace API](API_URL_HERE) like this:
+You can make `POST`,`PUT`,`GET`, `PATCH` and `DELETE` requests to the [Google Workspace API](https://developers.google.com/admin-sdk/overview?hl=es-419) like this:
 ```javascript
-var response = pkg.googleworkspace.api.post('/directory/v1/groups', body)
-var response = pkg.googleworkspace.api.post('/directory/v1/groups')
-var response = pkg.googleworkspace.api.put('/directory/v1/users/:userKey/photos/thumbnail', body)
-var response = pkg.googleworkspace.api.put('/directory/v1/users/:userKey/photos/thumbnail')
+var response = pkg.googleworkspace.api.post('/directory/v1/groups', {"email": "newgroup@slingr.io"})
+var response = pkg.googleworkspace.api.get('/directory/v1/groups')
+var response = pkg.googleworkspace.api.put('/directory/v1/users/:userKey/photos/thumbnail', {"photoData": "Base64EncodedData"})
+var response = pkg.googleworkspace.api.patch('/directory/v1/users/:userKey/photos/thumbnail', {"etag": "eTag","photoData": "Base64EncodedData"})
 var response = pkg.googleworkspace.api.get('/directory/v1/users/:userKey')
 var response = pkg.googleworkspace.api.delete('/directory/v1/users/:userKey')
 ```
+#### Note on 400 Errors for GET Requests:
+When making GET requests to list resources (e.g., users, groups), a 400 - Bad Request error may occur if required parameters are missing. This typically happens when listing resources without including necessary filters or query parameters.
+
+Recommendation:
+Ensure you include the appropriate parameters (e.g., domain, customer, maxResults, pageToken) to avoid this error.
+Refer to the Google Directory API documentation for specific parameter details per resource.
 
 Please take a look at the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)
 for more information about generic requests.
 
-## Flow Step
-
-As an alternative option to using scripts, you can make use of Flows and Flow Steps specifically created for the package:
-<details>
-    <summary>Click here to see the Flow Steps</summary>
-
-<br>
-
-### Generic Flow Step
-
-Generic flow step for full use of the entire package and its services.
-
-<h3>Inputs</h3>
-
-<table>
-    <thead>
-    <tr>
-        <th>Label</th>
-        <th>Type</th>
-        <th>Required</th>
-        <th>Default</th>
-        <th>Visibility</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>URL (Method)</td>
-        <td>choice</td>
-        <td>yes</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            This is the http method to be used against the endpoint. <br>
-            Possible values are: <br>
-            <i><strong>POST,PUT,GET,DELETE</strong></i>
-        </td>
-    </tr>
-    <tr>
-        <td>URL (Path)</td>
-        <td>choice</td>
-        <td>yes</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            The url to which this endpoint will send the request. This is the exact service to which the http request will be made. <br>
-            Possible values are: <br>
-            <i><strong>/directory/v1/groups<br>/directory/v1/groups/{groupKey}/aliases<br>/directory/v1/groups/{groupKey}/members<br>/directory/v1/customer/{customerKey}/orgunits<br>/directory/v1/customer/{customerKey}/roles<br>/directory/v1/customer/{customerKey}/roleassignments<br>/directory/v1/users<br>/directory/v1/users/{userKey}/makeAdmin<br>/directory/v1/users/{userKey}/undelete<br>/directory/v1/users/{userKey}/aliases<br>/directory/v1/customer/{customerKey}/schemas<br>/directory/v1/customer/{customerKey}/devices/mobile/{resourceId}/action<br>/datatransfer/v1/transfers<br>/directory/v1/groups/{groupKey}<br>/directory/v1/groups/{groupKey}/members/{memberKey}<br>/directory/v1/customer/{customerKey}/orgunits/{orgUnitPath}<br>/directory/v1/customers/{customerKey}<br>/directory/v1/users/{userKey}<br>/directory/v1/users/{userKey}/photos/thumbnail<br>/directory/v1/customer/{customerKey}/schemas/{schemaKey}<br>/directory/v1/groups/{groupKey}<br>/directory/v1/groups/{groupKey}/aliases<br>/directory/v1/groups/{groupKey}/members/{memberKey}<br>/directory/v1/customer/{customerKey}/orgunits/{orgUnitPath}<br>/directory/v1/customer/{customerKey}/roles/ALL/privileges<br>/directory/v1/customer/{customerKey}/roles<br>/directory/v1/customers/{customerKey}<br>/directory/v1/users/{userKey}<br>/directory/v1/users/{userKey}/photos/thumbnail<br>/directory/v1/users/{userKey}/aliases<br>/directory/v1/customer/{customerKey}/schemas/{schemaKey}<br>/directory/v1/customer/{customerKey}/devices/mobile<br>/directory/v1/customer/{customerKey}/devices/mobile/{resourceId}<br>/datatransfer/v1/applications<br>/datatransfer/v1/applications/{applicationId}<br>/datatransfer/v1/applications/{applicationId}<br>/datatransfer/v1/transfers<br>/datatransfer/v1/transfers/{dataTransferId}<br>/datatransfer/v1/transfers/{dataTransferId}<br>/directory/v1/groups/{domain}/{customer}/{pageToken}<br>/directory/v1/groups/{userKey}/{nextPageToken}<br>/directory/v1/groups/{groupKey}/members/{pageToken}<br>/directory/v1/customer/{customerKey}/orgunits/{orgUnitPath}<br>/directory/v1/users/{domain}/{pageToken}<br>/directory/v1/users/{costumer}/{pageToken}<br>/directory/v1/groups/{groupKey}/aliases/{aliasId}<br>/directory/v1/groups/{groupKey}<br>/directory/v1/groups/{groupKey}/members/{memberKey}<br>/directory/v1/customer/{customerKey}/orgunits/{orgUnitPath}<br>/directory/v1/users/{userKey}/photos/thumbnail<br>/directory/v1/users/{userKey}<br>/directory/v1/users/{userKey}/aliases/{aliasId}<br>/directory/v1/customer/{customerKey}/devices/mobile/{resourceId}<br></strong></i>
-        </td>
-    </tr>
-    <tr>
-        <td>Headers</td>
-        <td>keyValue</td>
-        <td>no</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            Used when you want to have a custom http header for the request.
-        </td>
-    </tr>
-    <tr>
-        <td>Query Params</td>
-        <td>keyValue</td>
-        <td>no</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            Used when you want to have a custom query params for the http call.
-        </td>
-    </tr>
-    <tr>
-        <td>Body</td>
-        <td>json</td>
-        <td>no</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            A payload of data can be sent to the server in the body of the request.
-        </td>
-    </tr>
-    <tr>
-        <td>Override Settings</td>
-        <td>boolean</td>
-        <td>no</td>
-        <td> false </td>
-        <td>Always</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Follow Redirect</td>
-        <td>boolean</td>
-        <td>no</td>
-        <td> false </td>
-        <td> overrideSettings </td>
-        <td>Indicates that the resource has to be downloaded into a file instead of returning it in the response.</td>
-    </tr>
-    <tr>
-        <td>Full response</td>
-        <td> boolean </td>
-        <td>no</td>
-        <td> false </td>
-        <td> overrideSettings </td>
-        <td>Include extended information about response</td>
-    </tr>
-    <tr>
-        <td>Connection Timeout</td>
-        <td> number </td>
-        <td>no</td>
-        <td> 5000 </td>
-        <td> overrideSettings </td>
-        <td>Connect a timeout interval, in milliseconds (0 = infinity).</td>
-    </tr>
-    <tr>
-        <td>Read Timeout</td>
-        <td> number </td>
-        <td>no</td>
-        <td> 60000 </td>
-        <td> overrideSettings </td>
-        <td>Read a timeout interval, in milliseconds (0 = infinity).</td>
-    </tr>
-    </tbody>
-</table>
-
-<h3>Outputs</h3>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>response</td>
-        <td>object</td>
-        <td>
-            Object resulting from the response to the endpoint call.
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-
-</details>
-
-For more information about how shortcuts or flow steps work, and how they are generated, take a look at the [slingr-helpgen tool](https://github.com/slingr-stack/slingr-helpgen).
-
-## Additional Flow Step
-
-
-<details>
-    <summary>Click here to see the Customs Flow Steps</summary>
-
-<br>
-
-
-
-### List all users Flow Step
-
-This flow step allows you to list all users from a project in Google Workspace.
-
-<h3>Outputs</h3>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>response</td>
-        <td>object</td>
-        <td>
-            Object resulting from the response to the endpoint call.
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-
-### Create a user Flow Step
-
-This flow step allows you to create a user in Google Workspace. The User object must follow the [Google Workspace User Schema](https://developers.google.com/admin-sdk/directory/v1/reference/users#resource-representation).
-
-<h3>Inputs</h3>
-
-<table>
-    <thead>
-    <tr>
-        <th>Label</th>
-        <th>Type</th>
-        <th>Required</th>
-        <th>Default</th>
-        <th>Visibility</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Body</td>
-        <td>json</td>
-        <td>no</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            A payload of data can be sent to the server in the body of the request.
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<h3>Outputs</h3>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>response</td>
-        <td>object</td>
-        <td>
-            Object resulting from the response to the endpoint call.
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-
-
-</details>
-
 ## Events
 
-There are no events for this package.
+### Webhook
+
+Incoming webhook events are automatically captured by the default listener named `Catch HTTP Google Workspace events`, which can be found below the `Scripts` section.
+Alternatively, you have the option to create a new package listener. For more information, please refer to the [Listeners Documentation](https://platform-docs.slingr.io/dev-reference/data-model-and-logic/listeners/).
+Please take a look at the Google Workspace documentation of the [Webhooks](https://developers.google.com/admin-sdk/directory/v1/guides/push?hl=es-419) for more information.
+
+### Subscribes to users changes to receive webhooks
+
+```javascript
+let body = {
+    "id": "01234567-89ab-cdef-0123456789ab", // Your channel ID.
+        "type": "web_hook",
+        "address": "https://mydomain.com/notifications", // Your receiving URL.
+...
+    "token": "target=myApp-myFilesChannelDest", // (Optional) Your channel token.
+        "params": {
+        "ttl": 3600 // (Optional) Your requested time-to-live for this channel.
+    }
+}
+const response = pkg.googledrive.api.post('/directory/v1/users/watch', body);
+```
+Once you make this request you will start to receive webhooks when your organization users are modified.
 
 ## Dependencies
-* HTTP Service (Latest Version)
+* HTTP Service
+* Oauth Package
 
-# About SLINGR
+# About Slingr
 
-SLINGR is a low-code rapid application development platform that accelerates development, with robust architecture for integrations and executing custom workflows and automation.
+Slingr is a low-code rapid application development platform that accelerates development, with robust architecture for integrations and executing custom workflows and automation.
 
 [More info about SLINGR](https://slingr.io)
 
